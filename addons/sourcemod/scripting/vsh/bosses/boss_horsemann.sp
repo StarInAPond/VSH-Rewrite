@@ -1,4 +1,4 @@
-#define HORSEMANN_MODEL "models/player/saxton_hale/hhh_jr_mk3.mdl"
+#define HORSEMANN_MODEL "models/bots/headless_hatman.mdl"
 #define HORSEMANN_THEME "ui/holiday/gamestartup_halloween.mp3"
 
 static char g_strHorsemannRoundStart[][] = {
@@ -75,6 +75,9 @@ methodmap CHorsemann < SaxtonHaleBase
 		boss.CallFunction("CreateAbility", "CTeleportSwap");
 		boss.CallFunction("CreateAbility", "CRageGhost");
 		
+		CModelOverride modelOverride = boss.CallFunction("CreateAbility", "CModelOverride");
+		modelOverride.SetModel(HORSEMANN_MODEL);
+		
 		boss.iBaseHealth = 700;
 		boss.iHealthPerPlayer = 650;
 		boss.nClass = TFClass_DemoMan;
@@ -122,11 +125,6 @@ methodmap CHorsemann < SaxtonHaleBase
 		264: melee range multiplier (tf_weapon_sword have 37% extra range)
 		551: special taunt
 		*/
-	}
-	
-	public void GetModel(char[] sModel, int length)
-	{
-		strcopy(sModel, length, HORSEMANN_MODEL);
 	}
 	
 	public void GetSound(char[] sSound, int length, SaxtonHaleSound iSoundType)
@@ -197,11 +195,5 @@ methodmap CHorsemann < SaxtonHaleBase
 		for (int i = 0; i < sizeof(g_strHorsemannTeleport); i++) PrecacheSound(g_strHorsemannTeleport[i]);
 		for (int i = 0; i < sizeof(g_strHorsemannVoice); i++) PrecacheSound(g_strHorsemannVoice[i]);
 		for (int i = 0; i < sizeof(g_strHorsemannFootsteps); i++) PrecacheSound(g_strHorsemannFootsteps[i]);
-		
-		AddFileToDownloadsTable("models/player/saxton_hale/hhh_jr_mk3.mdl");
-		AddFileToDownloadsTable("models/player/saxton_hale/hhh_jr_mk3.sw.vtx");
-		AddFileToDownloadsTable("models/player/saxton_hale/hhh_jr_mk3.vvd");
-		AddFileToDownloadsTable("models/player/saxton_hale/hhh_jr_mk3.dx80.vtx");
-		AddFileToDownloadsTable("models/player/saxton_hale/hhh_jr_mk3.dx90.vtx");
 	}
 };
